@@ -34,7 +34,7 @@ Init AppCrash in your Application class at the beginning of onCreate method:
 
 ```
 
-<img src='raw/sample1.gif' width='270' height='480' />
+<img src='raw/sampleError.gif' width='270' height='480' />  <img src='raw/sample1.gif' width='270' height='480' />
 
 By default library launch an activity with an error message and when click "Ok" relaunch the activity with LAUNCHER intent in the manifest.
 
@@ -47,7 +47,7 @@ To show a Dialog instead of a default Error Activity use:
 		AppCrash.get().showDialog();
 
 ```
-<img src='raw/sample1.gif' width='270' height='480' />
+<img src='raw/sample2.gif' width='270' height='480' />
 
 Or customizing default Error Activity ``content`` , ``background`` and ``initActivity`` when crash:
 
@@ -58,7 +58,7 @@ Or customizing default Error Activity ``content`` , ``background`` and ``initAct
                 .withView(R.layout.custom_error_view);
 ```
 
-<img src='raw/sample1.gif' width='270' height='480' />
+<img src='raw/sample3.gif' width='270' height='480' />
 
 Or customizing default Error Dialog ``content`` , ``background`` and ``initActivity`` when crash:
 
@@ -68,7 +68,7 @@ Or customizing default Error Dialog ``content`` , ``background`` and ``initActiv
                 .withBackgroundColor(android.R.color.black)
                 .withView(R.layout.custom_error_view).showDialog();
 ```
-<img src='raw/sample1.gif' width='270' height='480' />
+<img src='raw/sample4.gif' width='270' height='480' />
 
 You can check the sample App!
 
