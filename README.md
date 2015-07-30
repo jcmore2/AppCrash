@@ -34,7 +34,7 @@ Init AppCrash in your Application class at the beginning of onCreate method:
 
 ```
 
-<img src='raw/sampleError.gif' width='500' height='480' />  <img src='raw/sample1.gif' width='500' height='480' />
+<img src='raw/sampleError.gif' width='300' height='200' />  <img src='raw/sample1.gif' width='300' height='200' />
 
 By default library launch an activity with an error message and when click "Ok" relaunch the activity with LAUNCHER intent in the manifest.
 
