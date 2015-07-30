@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.WindowManager;
 
 
-class AppCrashService extends Service {
+public class AppCrashService extends Service {
 
     private static final String TAG = "AppCrashService";
 

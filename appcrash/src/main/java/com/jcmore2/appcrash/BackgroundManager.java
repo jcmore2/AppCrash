@@ -9,7 +9,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-class BackgroundManager implements Application.ActivityLifecycleCallbacks {
+public class BackgroundManager implements Application.ActivityLifecycleCallbacks {
 
     private static final String TAG = "BackgroundManager";
 
