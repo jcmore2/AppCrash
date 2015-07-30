@@ -19,6 +19,7 @@ android {
 }
 
 ext {
+    // ./gradlew bintrayUpload
     bintrayRepo = 'maven'
     bintrayName = 'appcrash'
 

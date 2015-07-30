@@ -18,6 +18,14 @@ Add library to your build.gradle:
 
 ```
 
+Add Window permission in your manifest:
+
+```xml
+
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+```
+
 Init AppCrash in your Application class at the beginning of onCreate method:
 
 ```java
