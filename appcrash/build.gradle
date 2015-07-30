@@ -23,13 +23,13 @@ ext {
     bintrayName = 'appcrash'
 
     publishedGroupId = 'com.jcmore2.appcrash'
-    libraryName = 'AppCrash'
+    libraryName = 'appcrash'
     artifact = 'appcrash'
 
-    libraryDescription = 'This library runs background service that is listening for shake movements in device.'
+    libraryDescription = 'AppCrash let you relaunch the app and manage crash message when your app has an exception. '
 
-    siteUrl = 'https://github.com/jcmore2/appcrash'
-    gitUrl = 'https://github.com/jcmore2/appcrash.git'
+    siteUrl = 'https://github.com/jcmore2/AppCrash'
+    gitUrl = 'https://github.com/jcmore2/AppCrash.git'
 
     libraryVersion = '1.0.0'
 
