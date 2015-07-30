@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
 /**
  * Created by jcmore2 on 25/2/15.
  */
-public class AppCrashView extends LinearLayout {
+class AppCrashView extends LinearLayout {
 
     private static final String TAG = "AppCrashView";
 
