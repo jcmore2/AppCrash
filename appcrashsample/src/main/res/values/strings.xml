@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">AppCrash Sample</string>
+    <string name="init">Init</string>
+    <string name="error">Fatal Error</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="crashActivity">Crash Activity!!</string>
+    <string name="crashDialog">Crash Dialog!!</string>
+    <string name="crashActivityCustom">Crash Activity Custom!!</string>
+    <string name="crashDialogCustom">Crash Dialog Custom!!</string>
+    <string name="action_settings">Settings</string>
+</resources>

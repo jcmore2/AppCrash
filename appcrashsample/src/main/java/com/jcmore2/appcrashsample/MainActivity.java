@@ -1,0 +1,81 @@
+package com.jcmore2.appcrashsample;
+
+import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+
+import com.jcmore2.appcrash.AppCrash;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        findViewById(R.id.crashButtonActivity).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                throw new RuntimeException("CRASH Activity!!!!!!");
+            }
+        });
+
+        findViewById(R.id.crashButtonDialog).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppCrash.get().showDialog();
+                throw new RuntimeException("CRASH Dialog!!!!!!");
+            }
+        });
+
+        findViewById(R.id.crashButtonActivityCustom).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                AppCrash.get().withInitActivity(InitActivity.class)
+                        .withBackgroundColor(android.R.color.black)
+                        .withView(R.layout.custom_error_view);
+
+                throw new RuntimeException("CRASH Activity CUSTOM!!!!!!");
+            }
+        });
+
+        findViewById(R.id.crashButtonDialogCustom).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                AppCrash.get().withInitActivity(InitActivity.class)
+                        .withBackgroundColor(android.R.color.black)
+                        .withView(R.layout.custom_error_view).showDialog();
+
+                throw new RuntimeException("CRASH Dialog CUSTOM!!!!!!");
+            }
+        });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+}

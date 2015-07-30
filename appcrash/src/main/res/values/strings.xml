@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">AppCrash</string>
+
+    <string name="_ok">Ok</string>
+    <string name="_crash">Opps! Something went wrong</string>
+</resources>
