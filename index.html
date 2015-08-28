@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>AppCrash by jcmore2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">AppCrash</h1>
+      <h2 class="project-tagline">AppCrash let you relaunch the app and manage crash message when your app has an exception.</h2>
+      <a href="https://github.com/jcmore2/AppCrash" class="btn">View on GitHub</a>
+      <a href="https://github.com/jcmore2/AppCrash/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/jcmore2/AppCrash/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="appcrash" class="anchor" href="#appcrash" aria-hidden="true"><span class="octicon octicon-link"></span></a>AppCrash</h1>
+
+<p>AppCrash let you relaunch the app and manage crash message when your app has an exception.</p>
+
+<p>AppCrash launch an Error default activity or an Error Dialog in your launcher Activity declared in the manifest.</p>
+
+<p><img src="https://raw.githubusercontent.com/jcmore2/AppCrash/master/raw/sample.png" width="270" height="480"></p>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Add library to your build.gradle:</p>
+
+<div class="highlight highlight-java"><pre>
+        compile <span class="pl-s"><span class="pl-pds">'</span>com.jcmore2.appcrash:appcrash:1.0.0<span class="pl-pds">'</span></span>
+</pre></div>
+
+<p>Add Window permission in your manifest:</p>
+
+<div class="highlight highlight-xml"><pre>
+    &lt;<span class="pl-ent">uses-permission</span> <span class="pl-e">android</span><span class="pl-e">:</span><span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>android.permission.SYSTEM_ALERT_WINDOW<span class="pl-pds">"</span></span> /&gt;
+</pre></div>
+
+<p>Init AppCrash in your Application class at the beginning of onCreate method:</p>
+
+<div class="highlight highlight-java"><pre>
+    <span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">AppApplication</span> <span class="pl-k">extends</span> <span class="pl-e">Application</span> {
+
+        <span class="pl-k">@Override</span>
+        <span class="pl-k">public</span> <span class="pl-k">void</span> <span class="pl-en">onCreate</span>() {
+            <span class="pl-v">super</span><span class="pl-k">.</span>onCreate();
+
+            <span class="pl-smi">AppCrash</span><span class="pl-k">.</span>init(<span class="pl-v">this</span>);
+        }
+    }
+</pre></div>
+
+<p><img src="https://raw.githubusercontent.com/jcmore2/AppCrash/master/raw/sampleError.gif" width="350" height="350">  <img src="https://raw.githubusercontent.com/jcmore2/AppCrash/master/raw/sample1.gif" width="350" height="350"></p>
+
+<p>By default library launch an activity with an error message and when click "Ok" relaunch the activity with LAUNCHER intent in the manifest.</p>
+
+<p>Instead of this behaviour, you can customize the activity and the dialog message:</p>
+
+<p>To show a Dialog instead of a default Error Activity use:</p>
+
+<div class="highlight highlight-java"><pre>
+        <span class="pl-smi">AppCrash</span><span class="pl-k">.</span>get()<span class="pl-k">.</span>showDialog();
+</pre></div>
+
+<p><img src="https://raw.githubusercontent.com/jcmore2/AppCrash/master/raw/sample2.gif" width="500" height="480"></p>
+
+<p>Or customizing default Error Activity <code>content</code> , <code>background</code> and <code>initActivity</code> when crash:</p>
+
+<div class="highlight highlight-java"><pre>
+        <span class="pl-smi">AppCrash</span><span class="pl-k">.</span>get()<span class="pl-k">.</span>withInitActivity(<span class="pl-smi">InitActivity</span><span class="pl-k">.</span>class)
+                .withBackgroundColor(<span class="pl-smi">android<span class="pl-k">.</span>R</span><span class="pl-k">.</span>color<span class="pl-k">.</span>black)
+                .withView(<span class="pl-smi">R</span><span class="pl-k">.</span>layout<span class="pl-k">.</span>custom_error_view);</pre></div>
+
+<p><img src="https://raw.githubusercontent.com/jcmore2/AppCrash/master/raw/sample3.gif" width="500" height="480"></p>
+
+<p>Or customizing default Error Dialog <code>content</code> , <code>background</code> and <code>initActivity</code> when crash:</p>
+
+<div class="highlight highlight-java"><pre>
+        <span class="pl-smi">AppCrash</span><span class="pl-k">.</span>get()<span class="pl-k">.</span>withInitActivity(<span class="pl-smi">InitActivity</span><span class="pl-k">.</span>class)
+                .withBackgroundColor(<span class="pl-smi">android<span class="pl-k">.</span>R</span><span class="pl-k">.</span>color<span class="pl-k">.</span>black)
+                .withView(<span class="pl-smi">R</span><span class="pl-k">.</span>layout<span class="pl-k">.</span>custom_error_view)<span class="pl-k">.</span>showDialog();</pre></div>
+
+<p><img src="https://raw.githubusercontent.com/jcmore2/AppCrash/master/raw/sample4.gif" width="500" height="480"></p>
+
+<p>You can check the sample App!</p>
+
+<h2>
+<a id="credits--contact" class="anchor" href="#credits--contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>Credits &amp; Contact</h2>
+
+<p>AppCrash was created by <a href="mailto:jcmore2@gmail.com">jcmore2@gmail.com</a></p>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>AppCrash is available under the Apache License, Version 2.0.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/jcmore2/AppCrash">AppCrash</a> is maintained by <a href="https://github.com/jcmore2">jcmore2</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
