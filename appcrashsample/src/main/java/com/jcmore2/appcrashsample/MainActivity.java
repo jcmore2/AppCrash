@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.jcmore2.appcrash.AppCrash;
 
@@ -25,7 +26,12 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.crashButtonDialog).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AppCrash.get().showDialog();
+                AppCrash.get().showDialog().setListener(new AppCrash.AppCrashListener() {
+                    @Override
+                    public void onAppCrash(Throwable ex) {
+                        Toast.makeText(MainActivity.this, AppCrash.traceExcetion(ex), Toast.LENGTH_LONG).show();
+                    }
+                });
                 throw new RuntimeException("CRASH Dialog!!!!!!");
             }
         });
@@ -36,7 +42,13 @@ public class MainActivity extends AppCompatActivity {
 
                 AppCrash.get().withInitActivity(InitActivity.class)
                         .withBackgroundColor(android.R.color.black)
-                        .withView(R.layout.custom_error_view);
+                        .withView(R.layout.custom_error_view).setListener(new AppCrash.AppCrashListener() {
+                    @Override
+                    public void onAppCrash(Throwable ex) {
+                        Toast.makeText(MainActivity.this, AppCrash.traceExcetion(ex), Toast.LENGTH_LONG).show();
+                    }
+                });
+                ;
 
                 throw new RuntimeException("CRASH Activity CUSTOM!!!!!!");
             }
@@ -48,7 +60,13 @@ public class MainActivity extends AppCompatActivity {
 
                 AppCrash.get().withInitActivity(InitActivity.class)
                         .withBackgroundColor(android.R.color.black)
-                        .withView(R.layout.custom_error_view).showDialog();
+                        .withView(R.layout.custom_error_view).showDialog().setListener(new AppCrash.AppCrashListener() {
+                    @Override
+                    public void onAppCrash(Throwable ex) {
+                        Toast.makeText(MainActivity.this, AppCrash.traceExcetion(ex), Toast.LENGTH_LONG).show();
+                    }
+                });
+                ;
 
                 throw new RuntimeException("CRASH Dialog CUSTOM!!!!!!");
             }

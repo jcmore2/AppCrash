@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AppCrashLib.iml" filepath="$PROJECT_DIR$/AppCrashLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AppCrash.iml" filepath="$PROJECT_DIR$/AppCrash.iml" />
       <module fileurl="file://$PROJECT_DIR$/appcrash/appcrash.iml" filepath="$PROJECT_DIR$/appcrash/appcrash.iml" />
       <module fileurl="file://$PROJECT_DIR$/appcrashsample/appcrashsample.iml" filepath="$PROJECT_DIR$/appcrashsample/appcrashsample.iml" />
     </modules>

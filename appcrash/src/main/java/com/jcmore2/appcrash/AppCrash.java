@@ -12,9 +12,8 @@ import java.io.Writer;
 
 /**
  * Created by jcmore2 on 28/7/15.
- *
+ * <p/>
  * AppCrash let you relaunch the app and manage crash message when your app has an exception.
- *
  */
 public class AppCrash {
 
@@ -37,6 +36,7 @@ public class AppCrash {
 
     protected static boolean showDialog = false;
 
+    private static AppCrashListener mListener;
 
     /**
      * Init the AppCrash instance
@@ -52,11 +52,13 @@ public class AppCrash {
         return sInstance;
     }
 
+
     /**
      * get the AppCrash instance
+     *
      * @return
      */
-    public static AppCrash get(){
+    public static AppCrash get() {
         if (sInstance == null) {
             throw new IllegalStateException(
                     "AppCrash is not initialised - invoke " +
@@ -67,30 +69,33 @@ public class AppCrash {
 
     /**
      * Set Content view
+     *
      * @param resourceLayout
      * @return
      */
-    public static AppCrash withView(int resourceLayout){
+    public static AppCrash withView(int resourceLayout) {
         contentView = resourceLayout;
         return sInstance;
     }
 
     /**
      * Set Background color view
+     *
      * @param color
      * @return
      */
-    public static AppCrash withBackgroundColor(int color){
+    public static AppCrash withBackgroundColor(int color) {
         backgroundColor = color;
         return sInstance;
     }
 
     /**
      * Set Activity to init App when crash
+     *
      * @param activity
      * @return
      */
-    public static AppCrash withInitActivity(Class<? extends Activity> activity){
+    public static AppCrash withInitActivity(Class<? extends Activity> activity) {
         initActivity = activity;
         initActivityName = activity.getName();
         return sInstance;
@@ -99,8 +104,16 @@ public class AppCrash {
     /**
      * ShowDialog
      */
-    public static void showDialog(){
+    public static AppCrash showDialog() {
         showDialog = true;
+        return sInstance;
+    }
+
+    /**
+     * ShowDialog
+     */
+    public static void setListener(AppCrashListener listener) {
+        mListener = listener;
     }
 
 
@@ -125,15 +138,17 @@ public class AppCrash {
                     public void uncaughtException(Thread thread, Throwable ex) {
 
                         traceExcetion(ex);
+                        if (mListener != null)
+                            mListener.onAppCrash(ex);
 
-                        if(showDialog){
-                            if(initActivity!=null) {
+                        if (showDialog) {
+                            if (initActivity != null) {
                                 launch(initActivity);
-                            }else{
+                            } else {
                                 launch(getLauncherActivity(application));
                             }
                             launchService();
-                        }else {
+                        } else {
                             launch(createAppCrashActivity());
                         }
 
@@ -167,15 +182,18 @@ public class AppCrash {
 
     /**
      * Write exception throw in Log
+     *
      * @param ex
      */
-    private static void traceExcetion(Throwable ex){
+    public static String traceExcetion(Throwable ex) {
 
         final Writer result = new StringWriter();
         final PrintWriter printWriter = new PrintWriter(result);
         ex.printStackTrace(printWriter);
         String stacktrace = result.toString();
         Log.e(TAG, "ERROR ---> " + stacktrace);
+
+        return stacktrace;
     }
 
     /**
@@ -209,6 +227,7 @@ public class AppCrash {
 
     /**
      * Launch the activity with params
+     *
      * @param activity
      */
     protected static void launch(Class<? extends Activity> activity) {
@@ -225,13 +244,19 @@ public class AppCrash {
     /**
      * Launch service with params
      */
-    private static void launchService(){
+    private static void launchService() {
 
         service = new Intent(application, AppCrashService.class);
         service.putExtra(CONTENT, contentView);
         service.putExtra(BG_COLOR, backgroundColor);
         application.startService(service);
 
+    }
+
+    public interface AppCrashListener {
+
+
+        void onAppCrash(Throwable ex);
     }
 
 }
