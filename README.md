@@ -14,7 +14,7 @@ Add library to your build.gradle:
 
 ```java
 
-	    compile 'com.jcmore2.appcrash:appcrash:1.0.0'
+	    compile 'com.jcmore2.appcrash:appcrash:1.1.0'
 
 ```
 

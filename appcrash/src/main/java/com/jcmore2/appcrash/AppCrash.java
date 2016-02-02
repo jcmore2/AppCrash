@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.view.View;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -12,7 +13,6 @@ import java.io.Writer;
 
 /**
  * Created by jcmore2 on 28/7/15.
- * <p/>
  * AppCrash let you relaunch the app and manage crash message when your app has an exception.
  */
 public class AppCrash {
@@ -26,7 +26,7 @@ public class AppCrash {
 
     protected static Class<? extends Activity> initActivity;
     protected static String initActivityName;
-    protected static int contentView = 0;
+    protected static int contentLayoutView = 0;
     protected static int backgroundColor = 0;
 
     protected static final String CONTENT = "CONTENT";
@@ -41,7 +41,8 @@ public class AppCrash {
     /**
      * Init the AppCrash instance
      *
-     * @param context
+     * @param context context
+     * @return instance
      */
     public static AppCrash init(Context context) {
 
@@ -56,7 +57,7 @@ public class AppCrash {
     /**
      * get the AppCrash instance
      *
-     * @return
+     * @return instance
      */
     public static AppCrash get() {
         if (sInstance == null) {
@@ -70,19 +71,20 @@ public class AppCrash {
     /**
      * Set Content view
      *
-     * @param resourceLayout
-     * @return
+     * @param resourceLayout layout
+     * @return instance
      */
     public static AppCrash withView(int resourceLayout) {
-        contentView = resourceLayout;
+        contentLayoutView = resourceLayout;
         return sInstance;
     }
+
 
     /**
      * Set Background color view
      *
-     * @param color
-     * @return
+     * @param color color
+     * @return instance
      */
     public static AppCrash withBackgroundColor(int color) {
         backgroundColor = color;
@@ -92,8 +94,8 @@ public class AppCrash {
     /**
      * Set Activity to init App when crash
      *
-     * @param activity
-     * @return
+     * @param activity activity
+     * @return instance
      */
     public static AppCrash withInitActivity(Class<? extends Activity> activity) {
         initActivity = activity;
@@ -103,6 +105,8 @@ public class AppCrash {
 
     /**
      * ShowDialog
+     *
+     * @return instance
      */
     public static AppCrash showDialog() {
         showDialog = true;
@@ -111,6 +115,8 @@ public class AppCrash {
 
     /**
      * ShowDialog
+     *
+     * @param listener listener
      */
     public static void setListener(AppCrashListener listener) {
         mListener = listener;
@@ -120,7 +126,7 @@ public class AppCrash {
     /**
      * Constructor
      *
-     * @param context
+     * @param context context
      */
     private AppCrash(Context context) {
         try {
@@ -151,6 +157,7 @@ public class AppCrash {
                         } else {
                             launch(createAppCrashActivity());
                         }
+
 
                         android.os.Process.killProcess(android.os.Process.myPid());
                         System.exit(10);
@@ -183,7 +190,8 @@ public class AppCrash {
     /**
      * Write exception throw in Log
      *
-     * @param ex
+     * @param ex exception
+     * @return string
      */
     public static String traceExcetion(Throwable ex) {
 
@@ -199,7 +207,7 @@ public class AppCrash {
     /**
      * This method return default AppCrashActivity
      *
-     * @return
+     * @return class
      */
     private static Class<? extends Activity> createAppCrashActivity() {
         return AppCrashActivity.class;
@@ -208,8 +216,8 @@ public class AppCrash {
     /**
      * This Method return default App launcher activity
      *
-     * @param context
-     * @return
+     * @param context context
+     * @return class
      */
     @SuppressWarnings("unchecked")
     protected static Class<? extends Activity> getLauncherActivity(Context context) {
@@ -228,16 +236,16 @@ public class AppCrash {
     /**
      * Launch the activity with params
      *
-     * @param activity
+     * @param activity activity
      */
     protected static void launch(Class<? extends Activity> activity) {
 
         final Intent intent = new Intent(application, activity);
-        intent.putExtra(CONTENT, contentView);
+        intent.putExtra(CONTENT, contentLayoutView);
         intent.putExtra(BG_COLOR, backgroundColor);
         intent.putExtra(INIT_ACTIVITY, initActivityName);
 
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         application.startActivity(intent);
     }
 
@@ -247,7 +255,7 @@ public class AppCrash {
     private static void launchService() {
 
         service = new Intent(application, AppCrashService.class);
-        service.putExtra(CONTENT, contentView);
+        service.putExtra(CONTENT, contentLayoutView);
         service.putExtra(BG_COLOR, backgroundColor);
         application.startService(service);
 

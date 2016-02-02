@@ -32,7 +32,7 @@ ext {
     siteUrl = 'https://github.com/jcmore2/AppCrash'
     gitUrl = 'https://github.com/jcmore2/AppCrash.git'
 
-    libraryVersion = '1.0.1'
+    libraryVersion = '1.1.0'
 
     developerId = 'jcmore2'
     developerName = 'Juan Carlos Moreno'

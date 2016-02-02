@@ -47,8 +47,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onAppCrash(Throwable ex) {
                         Toast.makeText(MainActivity.this, AppCrash.traceExcetion(ex), Toast.LENGTH_LONG).show();
                     }
-                });
-                ;
+                });;
 
                 throw new RuntimeException("CRASH Activity CUSTOM!!!!!!");
             }
@@ -66,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, AppCrash.traceExcetion(ex), Toast.LENGTH_LONG).show();
                     }
                 });
-                ;
 
                 throw new RuntimeException("CRASH Dialog CUSTOM!!!!!!");
             }

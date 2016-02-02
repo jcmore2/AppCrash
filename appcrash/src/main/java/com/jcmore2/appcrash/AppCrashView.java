@@ -27,7 +27,7 @@ public class AppCrashView extends LinearLayout {
 
 
     /**
-     * @param context
+     * @param context context
      */
     public AppCrashView(Context context) {
         super(context);
@@ -35,8 +35,8 @@ public class AppCrashView extends LinearLayout {
     }
 
     /**
-     * @param context
-     * @param attrs
+     * @param context context
+     * @param attrs attributes
      */
     public AppCrashView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -44,9 +44,9 @@ public class AppCrashView extends LinearLayout {
     }
 
     /**
-     * @param context
-     * @param attrs
-     * @param defStyle
+     * @param context context
+     * @param attrs attrs
+     * @param defStyle styles
      */
     public AppCrashView(Context context, AttributeSet attrs,
                         int defStyle) {
@@ -57,7 +57,7 @@ public class AppCrashView extends LinearLayout {
     /**
      * Function use to init the visual components of view
      *
-     * @param context
+     * @param context context
      */
     private synchronized void init(Context context) {
         mContext = context;
@@ -123,7 +123,7 @@ public class AppCrashView extends LinearLayout {
 
     /**
      * Set New Bg color to crash view
-     * @param bgColor
+     * @param bgColor color
      */
     protected void setNewBgColor(int bgColor){
 
@@ -135,7 +135,7 @@ public class AppCrashView extends LinearLayout {
 
     /**
      * Set new content crash
-     * @param content
+     * @param content content
      */
     protected void setNewContent(int content){
 
